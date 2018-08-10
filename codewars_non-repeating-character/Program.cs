@@ -7,7 +7,7 @@ namespace codewars_non_repeating_character
     {
         static void Main(string[] args)
         {
-            var answer = Kata.FirstNonRepeatingLetter("illinois");
+            var answer = Kata.FirstNonRepeatingLetter("salasek");
             Console.WriteLine(answer);
         }
     }
@@ -28,13 +28,29 @@ namespace codewars_non_repeating_character
             //        }
             //}
             //s.ToCharArray();
+            string answer = "error";
+
             var firstLetter = s.GroupBy(x => x)
-                               .OrderBy(x => x.Key);
+                               .Select(y => new { y.Key, Count = y.Count()}
+                               //.where (x => x.Count < 2)
+            
+            );
+
+                               //.OrderBy(y => y);
                                //OrderByDescending(s.Key).LastOrDefault(s)
+            foreach (var result in firstLetter)
+            {
+                if (result.Count < 2)
+                {
 
-
-            Console.WriteLine(firstLetter);
-            return s.Substring(0, 1);
+                    answer = result.Key.ToString();
+                    break;
+                }
+                Console.WriteLine("{0} = {1}", result.Key, result.Count);
+            }
+            //Console.WriteLine(firstLetter.Where(x => x.Count == 1));
+            //return s.Substring(0, 1);
+            return answer;
             
         }
     }
